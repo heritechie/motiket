@@ -8,9 +8,23 @@ on:
 
 jobs:
 
-  build:
-    name: Build
+  test:
+    name: Test
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: secret
+          POSTGRES_DB: motiket
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --halth-retries 5
+
     steps:
 
     - name: Set up Go 1.x
@@ -22,6 +36,10 @@ jobs:
     - name: Check out code into the Go module directory
       uses: actions/checkout@v2
 
-    - name: Runt test
+    - name: Run migrations
+      working-directory: ./api
+      run: make migrateup
+
+    - name: Run test
       working-directory: ./api
       run: make test
