@@ -94,7 +94,7 @@ func (q *Queries) ListEvent(ctx context.Context, arg ListEventParams) ([]Event, 
 		return nil, err
 	}
 	defer rows.Close()
-	var items []Event
+	items := []Event{}
 	for rows.Next() {
 		var i Event
 		if err := rows.Scan(

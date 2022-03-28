@@ -6,18 +6,20 @@ import (
 	"os"
 	"testing"
 
+	"github.com/heritechie/motiket/api/internal/util"
 	_ "github.com/lib/pq"
-)
-
-const (
-	dbDriver = "postgres"
-	dbSource = "postgresql://root:secret@localhost:5432/motiket?sslmode=disable"
 )
 
 var testQueries *Queries
 
 func TestMain(m *testing.M) {
-	conn, err := sql.Open(dbDriver, dbSource)
+	config, err := util.LoadConfig("../../../")
+
+	if err != nil {
+		log.Fatal("cannot load config", err)
+	}
+
+	conn, err := sql.Open(config.DBDriver, config.DBSource)
 
 	if err != nil {
 		log.Fatal("cannot connect to db: ", err)
