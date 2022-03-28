@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/heritechie/motiket/api/util"
+	"github.com/heritechie/motiket/api/internal/util"
 	"github.com/stretchr/testify/require"
 )
 
