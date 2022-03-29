@@ -69,6 +69,7 @@ CREATE TABLE "customer_payment" (
   "failed_reason" text,
   "created_at" timestamptz NOT NULL DEFAULT (now()),
   "updated_at" timestamptz NOT NULL DEFAULT (now()),
+  "customer_id" uuid,
   "customer_order_id" uuid NOT NULL,
   "payment_option_id" int NOT NULL
 );
@@ -81,8 +82,6 @@ CREATE TABLE "payment_option" (
 ALTER TABLE "ticket_category" ADD FOREIGN KEY ("event_id") REFERENCES "event" ("id");
 
 ALTER TABLE "ticket" ADD FOREIGN KEY ("ticket_category_id") REFERENCES "ticket_category" ("id");
-
-ALTER TABLE "ticket" ADD FOREIGN KEY ("event_id") REFERENCES "event" ("id");
 
 ALTER TABLE "customer_order" ADD FOREIGN KEY ("customer_id") REFERENCES "customer" ("id");
 
@@ -105,8 +104,6 @@ CREATE INDEX ON "ticket_category" ("event_id");
 CREATE UNIQUE INDEX ON "ticket" ("serial_number");
 
 CREATE INDEX ON "ticket" ("ticket_category_id");
-
-CREATE INDEX ON "ticket" ("event_id");
 
 CREATE UNIQUE INDEX ON "customer" ("email");
 
