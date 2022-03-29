@@ -36,6 +36,51 @@ func (m *MockStore) EXPECT() *MockStoreMockRecorder {
 	return m.recorder
 }
 
+// CreateCustomer mocks base method.
+func (m *MockStore) CreateCustomer(arg0 context.Context, arg1 db.CreateCustomerParams) (db.Customer, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateCustomer", arg0, arg1)
+	ret0, _ := ret[0].(db.Customer)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateCustomer indicates an expected call of CreateCustomer.
+func (mr *MockStoreMockRecorder) CreateCustomer(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateCustomer", reflect.TypeOf((*MockStore)(nil).CreateCustomer), arg0, arg1)
+}
+
+// CreateCustomerOrder mocks base method.
+func (m *MockStore) CreateCustomerOrder(arg0 context.Context, arg1 db.CreateCustomerOrderParams) (db.CustomerOrder, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateCustomerOrder", arg0, arg1)
+	ret0, _ := ret[0].(db.CustomerOrder)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateCustomerOrder indicates an expected call of CreateCustomerOrder.
+func (mr *MockStoreMockRecorder) CreateCustomerOrder(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateCustomerOrder", reflect.TypeOf((*MockStore)(nil).CreateCustomerOrder), arg0, arg1)
+}
+
+// CreateCustomerPayment mocks base method.
+func (m *MockStore) CreateCustomerPayment(arg0 context.Context, arg1 db.CreateCustomerPaymentParams) (db.CustomerPayment, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateCustomerPayment", arg0, arg1)
+	ret0, _ := ret[0].(db.CustomerPayment)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateCustomerPayment indicates an expected call of CreateCustomerPayment.
+func (mr *MockStoreMockRecorder) CreateCustomerPayment(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateCustomerPayment", reflect.TypeOf((*MockStore)(nil).CreateCustomerPayment), arg0, arg1)
+}
+
 // CreateEvent mocks base method.
 func (m *MockStore) CreateEvent(arg0 context.Context, arg1 db.CreateEventParams) (db.Event, error) {
 	m.ctrl.T.Helper()
@@ -49,6 +94,111 @@ func (m *MockStore) CreateEvent(arg0 context.Context, arg1 db.CreateEventParams)
 func (mr *MockStoreMockRecorder) CreateEvent(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateEvent", reflect.TypeOf((*MockStore)(nil).CreateEvent), arg0, arg1)
+}
+
+// CreateOrderTicket mocks base method.
+func (m *MockStore) CreateOrderTicket(arg0 context.Context, arg1 db.CreateOrderTicketParams) (db.OrderTicket, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateOrderTicket", arg0, arg1)
+	ret0, _ := ret[0].(db.OrderTicket)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateOrderTicket indicates an expected call of CreateOrderTicket.
+func (mr *MockStoreMockRecorder) CreateOrderTicket(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateOrderTicket", reflect.TypeOf((*MockStore)(nil).CreateOrderTicket), arg0, arg1)
+}
+
+// CreatePaymentOption mocks base method.
+func (m *MockStore) CreatePaymentOption(arg0 context.Context, arg1 string) (db.PaymentOption, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreatePaymentOption", arg0, arg1)
+	ret0, _ := ret[0].(db.PaymentOption)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreatePaymentOption indicates an expected call of CreatePaymentOption.
+func (mr *MockStoreMockRecorder) CreatePaymentOption(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreatePaymentOption", reflect.TypeOf((*MockStore)(nil).CreatePaymentOption), arg0, arg1)
+}
+
+// CreateTicket mocks base method.
+func (m *MockStore) CreateTicket(arg0 context.Context, arg1 db.CreateTicketParams) (db.Ticket, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateTicket", arg0, arg1)
+	ret0, _ := ret[0].(db.Ticket)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateTicket indicates an expected call of CreateTicket.
+func (mr *MockStoreMockRecorder) CreateTicket(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateTicket", reflect.TypeOf((*MockStore)(nil).CreateTicket), arg0, arg1)
+}
+
+// CreateTicketCategory mocks base method.
+func (m *MockStore) CreateTicketCategory(arg0 context.Context, arg1 db.CreateTicketCategoryParams) (db.TicketCategory, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateTicketCategory", arg0, arg1)
+	ret0, _ := ret[0].(db.TicketCategory)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateTicketCategory indicates an expected call of CreateTicketCategory.
+func (mr *MockStoreMockRecorder) CreateTicketCategory(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateTicketCategory", reflect.TypeOf((*MockStore)(nil).CreateTicketCategory), arg0, arg1)
+}
+
+// GetCustomer mocks base method.
+func (m *MockStore) GetCustomer(arg0 context.Context, arg1 uuid.UUID) (db.Customer, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetCustomer", arg0, arg1)
+	ret0, _ := ret[0].(db.Customer)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetCustomer indicates an expected call of GetCustomer.
+func (mr *MockStoreMockRecorder) GetCustomer(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCustomer", reflect.TypeOf((*MockStore)(nil).GetCustomer), arg0, arg1)
+}
+
+// GetCustomerOrder mocks base method.
+func (m *MockStore) GetCustomerOrder(arg0 context.Context, arg1 uuid.UUID) (db.CustomerOrder, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetCustomerOrder", arg0, arg1)
+	ret0, _ := ret[0].(db.CustomerOrder)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetCustomerOrder indicates an expected call of GetCustomerOrder.
+func (mr *MockStoreMockRecorder) GetCustomerOrder(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCustomerOrder", reflect.TypeOf((*MockStore)(nil).GetCustomerOrder), arg0, arg1)
+}
+
+// GetCustomerPayment mocks base method.
+func (m *MockStore) GetCustomerPayment(arg0 context.Context, arg1 uuid.UUID) (db.CustomerPayment, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetCustomerPayment", arg0, arg1)
+	ret0, _ := ret[0].(db.CustomerPayment)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetCustomerPayment indicates an expected call of GetCustomerPayment.
+func (mr *MockStoreMockRecorder) GetCustomerPayment(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCustomerPayment", reflect.TypeOf((*MockStore)(nil).GetCustomerPayment), arg0, arg1)
 }
 
 // GetEvent mocks base method.
@@ -66,6 +216,96 @@ func (mr *MockStoreMockRecorder) GetEvent(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEvent", reflect.TypeOf((*MockStore)(nil).GetEvent), arg0, arg1)
 }
 
+// GetPaymentOption mocks base method.
+func (m *MockStore) GetPaymentOption(arg0 context.Context, arg1 int32) (db.PaymentOption, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetPaymentOption", arg0, arg1)
+	ret0, _ := ret[0].(db.PaymentOption)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetPaymentOption indicates an expected call of GetPaymentOption.
+func (mr *MockStoreMockRecorder) GetPaymentOption(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPaymentOption", reflect.TypeOf((*MockStore)(nil).GetPaymentOption), arg0, arg1)
+}
+
+// GetTicket mocks base method.
+func (m *MockStore) GetTicket(arg0 context.Context, arg1 uuid.UUID) (db.Ticket, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicket", arg0, arg1)
+	ret0, _ := ret[0].(db.Ticket)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetTicket indicates an expected call of GetTicket.
+func (mr *MockStoreMockRecorder) GetTicket(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicket", reflect.TypeOf((*MockStore)(nil).GetTicket), arg0, arg1)
+}
+
+// GetTicketCategory mocks base method.
+func (m *MockStore) GetTicketCategory(arg0 context.Context, arg1 uuid.UUID) (db.TicketCategory, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTicketCategory", arg0, arg1)
+	ret0, _ := ret[0].(db.TicketCategory)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetTicketCategory indicates an expected call of GetTicketCategory.
+func (mr *MockStoreMockRecorder) GetTicketCategory(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTicketCategory", reflect.TypeOf((*MockStore)(nil).GetTicketCategory), arg0, arg1)
+}
+
+// ListCustomer mocks base method.
+func (m *MockStore) ListCustomer(arg0 context.Context, arg1 db.ListCustomerParams) ([]db.Customer, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListCustomer", arg0, arg1)
+	ret0, _ := ret[0].([]db.Customer)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListCustomer indicates an expected call of ListCustomer.
+func (mr *MockStoreMockRecorder) ListCustomer(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListCustomer", reflect.TypeOf((*MockStore)(nil).ListCustomer), arg0, arg1)
+}
+
+// ListCustomerOrder mocks base method.
+func (m *MockStore) ListCustomerOrder(arg0 context.Context, arg1 db.ListCustomerOrderParams) ([]db.CustomerOrder, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListCustomerOrder", arg0, arg1)
+	ret0, _ := ret[0].([]db.CustomerOrder)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListCustomerOrder indicates an expected call of ListCustomerOrder.
+func (mr *MockStoreMockRecorder) ListCustomerOrder(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListCustomerOrder", reflect.TypeOf((*MockStore)(nil).ListCustomerOrder), arg0, arg1)
+}
+
+// ListCustomerPayment mocks base method.
+func (m *MockStore) ListCustomerPayment(arg0 context.Context, arg1 db.ListCustomerPaymentParams) ([]db.CustomerPayment, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListCustomerPayment", arg0, arg1)
+	ret0, _ := ret[0].([]db.CustomerPayment)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListCustomerPayment indicates an expected call of ListCustomerPayment.
+func (mr *MockStoreMockRecorder) ListCustomerPayment(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListCustomerPayment", reflect.TypeOf((*MockStore)(nil).ListCustomerPayment), arg0, arg1)
+}
+
 // ListEvent mocks base method.
 func (m *MockStore) ListEvent(arg0 context.Context, arg1 db.ListEventParams) ([]db.Event, error) {
 	m.ctrl.T.Helper()
@@ -79,4 +319,64 @@ func (m *MockStore) ListEvent(arg0 context.Context, arg1 db.ListEventParams) ([]
 func (mr *MockStoreMockRecorder) ListEvent(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListEvent", reflect.TypeOf((*MockStore)(nil).ListEvent), arg0, arg1)
+}
+
+// ListOrderTicket mocks base method.
+func (m *MockStore) ListOrderTicket(arg0 context.Context, arg1 db.ListOrderTicketParams) ([]db.OrderTicket, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListOrderTicket", arg0, arg1)
+	ret0, _ := ret[0].([]db.OrderTicket)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListOrderTicket indicates an expected call of ListOrderTicket.
+func (mr *MockStoreMockRecorder) ListOrderTicket(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListOrderTicket", reflect.TypeOf((*MockStore)(nil).ListOrderTicket), arg0, arg1)
+}
+
+// ListPaymentOption mocks base method.
+func (m *MockStore) ListPaymentOption(arg0 context.Context, arg1 db.ListPaymentOptionParams) ([]db.PaymentOption, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListPaymentOption", arg0, arg1)
+	ret0, _ := ret[0].([]db.PaymentOption)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListPaymentOption indicates an expected call of ListPaymentOption.
+func (mr *MockStoreMockRecorder) ListPaymentOption(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListPaymentOption", reflect.TypeOf((*MockStore)(nil).ListPaymentOption), arg0, arg1)
+}
+
+// ListTicket mocks base method.
+func (m *MockStore) ListTicket(arg0 context.Context, arg1 db.ListTicketParams) ([]db.Ticket, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListTicket", arg0, arg1)
+	ret0, _ := ret[0].([]db.Ticket)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListTicket indicates an expected call of ListTicket.
+func (mr *MockStoreMockRecorder) ListTicket(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListTicket", reflect.TypeOf((*MockStore)(nil).ListTicket), arg0, arg1)
+}
+
+// ListTicketCategory mocks base method.
+func (m *MockStore) ListTicketCategory(arg0 context.Context, arg1 db.ListTicketCategoryParams) ([]db.TicketCategory, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListTicketCategory", arg0, arg1)
+	ret0, _ := ret[0].([]db.TicketCategory)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListTicketCategory indicates an expected call of ListTicketCategory.
+func (mr *MockStoreMockRecorder) ListTicketCategory(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListTicketCategory", reflect.TypeOf((*MockStore)(nil).ListTicketCategory), arg0, arg1)
 }
