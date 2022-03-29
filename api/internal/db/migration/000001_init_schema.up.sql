@@ -20,7 +20,7 @@ CREATE TABLE "ticket_category" (
   "created_at" timestamptz NOT NULL DEFAULT (now()),
   "updated_at" timestamptz NOT NULL DEFAULT (now()),
   "area" varchar,
-  "event_id" uuid
+  "event_id" uuid NOT NULL
 );
 
 CREATE TABLE "ticket" (
@@ -30,8 +30,8 @@ CREATE TABLE "ticket" (
   "purchase_date" timestamptz,
   "created_at" timestamptz NOT NULL DEFAULT (now()),
   "updated_at" timestamptz NOT NULL DEFAULT (now()),
-  "ticket_category_id" uuid,
-  "event_id" uuid
+  "ticket_category_id" uuid NOT NULL,
+  "event_id" uuid NOT NULL
 );
 
 CREATE TABLE "customer" (
@@ -53,16 +53,16 @@ CREATE TABLE "customer_order" (
   "total_price" bigint NOT NULL,
   "discount" int,
   "final_price" bigint NOT NULL,
-  "customer_id" uuid,
-  "customer_payment_id" uuid,
+  "customer_id" uuid NOT NULL,
+  "customer_payment_id" uuid NOT NULL,
   "created_at" timestamptz NOT NULL DEFAULT (now()),
   "updated_at" timestamptz NOT NULL DEFAULT (now())
 );
 
 CREATE TABLE "order_ticket" (
-  "qty" int DEFAULT 1,
-  "ticket_id" uuid,
-  "customer_order_id" uuid
+  "qty" int DEFAULT 1 NOT NULL,
+  "ticket_id" uuid NOT NULL,
+  "customer_order_id" uuid NOT NULL
 );
 
 CREATE TABLE "customer_payment" (
@@ -72,7 +72,7 @@ CREATE TABLE "customer_payment" (
   "failed_reason" text,
   "created_at" timestamptz NOT NULL DEFAULT (now()),
   "updated_at" timestamptz NOT NULL DEFAULT (now()),
-  "customer_id" uuid,
+  "customer_id" uuid NOT NULL,
   "payment_option_id" int
 );
 

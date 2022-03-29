@@ -28,8 +28,8 @@ type CustomerOrder struct {
 	TotalPrice        int64         `json:"total_price"`
 	Discount          sql.NullInt32 `json:"discount"`
 	FinalPrice        int64         `json:"final_price"`
-	CustomerID        uuid.NullUUID `json:"customer_id"`
-	CustomerPaymentID uuid.NullUUID `json:"customer_payment_id"`
+	CustomerID        uuid.UUID     `json:"customer_id"`
+	CustomerPaymentID uuid.UUID     `json:"customer_payment_id"`
 	// When order created
 	CreatedAt time.Time `json:"created_at"`
 	// When order created
@@ -45,7 +45,7 @@ type CustomerPayment struct {
 	CreatedAt time.Time `json:"created_at"`
 	// When payment created
 	UpdatedAt       time.Time     `json:"updated_at"`
-	CustomerID      uuid.NullUUID `json:"customer_id"`
+	CustomerID      uuid.UUID     `json:"customer_id"`
 	PaymentOptionID sql.NullInt32 `json:"payment_option_id"`
 }
 
@@ -61,9 +61,9 @@ type Event struct {
 }
 
 type OrderTicket struct {
-	Qty             sql.NullInt32 `json:"qty"`
-	TicketID        uuid.NullUUID `json:"ticket_id"`
-	CustomerOrderID uuid.NullUUID `json:"customer_order_id"`
+	Qty             int32     `json:"qty"`
+	TicketID        uuid.UUID `json:"ticket_id"`
+	CustomerOrderID uuid.UUID `json:"customer_order_id"`
 }
 
 type PaymentOption struct {
@@ -78,8 +78,8 @@ type Ticket struct {
 	PurchaseDate     sql.NullTime   `json:"purchase_date"`
 	CreatedAt        time.Time      `json:"created_at"`
 	UpdatedAt        time.Time      `json:"updated_at"`
-	TicketCategoryID uuid.NullUUID  `json:"ticket_category_id"`
-	EventID          uuid.NullUUID  `json:"event_id"`
+	TicketCategoryID uuid.UUID      `json:"ticket_category_id"`
+	EventID          uuid.UUID      `json:"event_id"`
 }
 
 type TicketCategory struct {
@@ -93,5 +93,5 @@ type TicketCategory struct {
 	CreatedAt time.Time      `json:"created_at"`
 	UpdatedAt time.Time      `json:"updated_at"`
 	Area      sql.NullString `json:"area"`
-	EventID   uuid.NullUUID  `json:"event_id"`
+	EventID   uuid.UUID      `json:"event_id"`
 }
