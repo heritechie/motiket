@@ -8,8 +8,16 @@ INSERT INTO order_ticket (
 ) RETURNING *;
 
 
--- name: ListOrderTicket :many
-SELECT * FROM order_ticket
+-- name: ListOrderTicketByCustomerOrderId :many
+SELECT 
+  t.id, 
+  t.serial_number, 
+  COALESCE(t.purchase_date, now()) purchase_date,
+  tc.name category_name
+FROM order_ticket ot
+INNER JOIN ticket t ON t.id = ot.ticket_id
+INNER JOIN ticket_category tc ON tc.id = t.ticket_category_id
+WHERE ot.customer_order_id = $1
 ORDER BY id
-LIMIT $1
-OFFSET $2;
+LIMIT $2
+OFFSET $3;

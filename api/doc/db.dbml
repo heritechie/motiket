@@ -1,0 +1,122 @@
+Project Motiket {
+  database_type: 'PostgreSQL'
+  Note: '''
+    # Event Ticket Order Database
+  '''
+}
+
+
+Table event as E {
+  id uuid [pk]
+  name varchar [not null]
+  description text
+  start_date date
+  end_date    date
+  prefix  varchar [not null]
+  created_at timestamptz [not null, default: `now()`, note: 'When event created']
+  updated_at timestamptz [not null, default: `now()`, note: 'When event created']
+  
+  Indexes {
+    name
+  }
+}
+
+Table ticket_category as TC {
+  id uuid [pk]
+  name varchar [not null]
+  prefix  varchar [not null]
+  qty bigint [not null]
+  price bigint [not null]
+  start_date date
+  end_date    date
+  created_at timestamptz [not null, default: `now()`, note: 'When ticket category created']
+  updated_at timestamptz [not null, default: `now()`, note: 'When ticket category created']
+  area varchar 
+  event_id uuid [ref: > E.id, not null]
+  
+  Indexes {
+    name
+    event_id
+  }
+  
+}
+
+Table ticket as T {
+  id uuid [pk]
+  serial_number varchar [not null]
+  purchase_date timestamptz 
+  created_at timestamptz [not null, default: `now()`, note: 'When ticket created']
+  updated_at timestamptz [not null, default: `now()`, note: 'When ticket created']
+  ticket_category_id uuid [ref: > TC.id, not null]
+  
+  Indexes {
+    serial_number [unique]
+    ticket_category_id
+  }
+}
+
+Table customer as C {
+  id uuid [pk]
+  full_name varchar
+  email varchar
+  password varchar
+  phone_number varchar
+  confirmation_code text
+  confirmation_time timestamptz
+  created_at timestamptz [not null, default: `now()`, note: 'When customer created']
+  updated_at timestamptz [not null, default: `now()`, note: 'When customer created']
+  
+  Indexes {
+    email [unique]
+    phone_number [unique]
+    full_name
+  }
+}
+
+Table customer_order as CO {
+  id uuid [pk]
+  order_time timestamptz [not null]
+  time_paid timestamptz
+  total_price bigint [not null]
+  discount    int
+  final_price bigint [not null]
+  customer_id  uuid [ref: > C.id, not null]
+  created_at timestamptz [not null, default: `now()`, note: 'When order created']
+  updated_at timestamptz [not null, default: `now()`, note: 'When order created'] 
+}
+
+Table order_ticket as OT {
+  qty int [default: 1]
+  ticket_id  uuid [ref: > T.id, not null]
+  customer_order_id  uuid [ref: > CO.id, not null]
+  
+  Indexes {
+    ticket_id
+    customer_order_id
+  }
+}
+
+
+Table customer_payment as CP {
+  id uuid [pk]
+  status varchar [not null]
+  success_at  timestamptz
+  failed_reason text
+  created_at timestamptz [not null, default: `now()`, note: 'When payment created']
+  updated_at timestamptz [not null, default: `now()`, note: 'When payment created'] 
+  customer_id  uuid [ref: > C.id]
+  customer_order_id  uuid [ref: > CO.id, not null]
+  payment_option_id int [ref: > PO.id, not null]
+  
+  Indexes {
+    status
+    customer_id
+    payment_option_id
+  }
+}
+
+
+Table payment_option as PO {
+  id serial [pk]
+  name varchar [not null]
+}

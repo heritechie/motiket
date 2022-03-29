@@ -28,10 +28,11 @@ type Querier interface {
 	ListCustomerOrder(ctx context.Context, arg ListCustomerOrderParams) ([]CustomerOrder, error)
 	ListCustomerPayment(ctx context.Context, arg ListCustomerPaymentParams) ([]CustomerPayment, error)
 	ListEvent(ctx context.Context, arg ListEventParams) ([]Event, error)
-	ListOrderTicket(ctx context.Context, arg ListOrderTicketParams) ([]OrderTicket, error)
+	ListOrderTicketByCustomerOrderId(ctx context.Context, arg ListOrderTicketByCustomerOrderIdParams) ([]ListOrderTicketByCustomerOrderIdRow, error)
 	ListPaymentOption(ctx context.Context, arg ListPaymentOptionParams) ([]PaymentOption, error)
 	ListTicket(ctx context.Context, arg ListTicketParams) ([]Ticket, error)
 	ListTicketCategory(ctx context.Context, arg ListTicketCategoryParams) ([]TicketCategory, error)
+	UpdateCustomerPayment(ctx context.Context, arg UpdateCustomerPaymentParams) (CustomerPayment, error)
 }
 
 var _ Querier = (*Queries)(nil)

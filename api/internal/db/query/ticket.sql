@@ -2,12 +2,10 @@
 INSERT INTO ticket (
   id,
   serial_number,
-  seat,
   purchase_date,
-  ticket_category_id,
-  event_id
+  ticket_category_id
 ) VALUES (
-  $1, $2, $3, $4, $5, $6
+  $1, $2, $3, $4
 ) RETURNING *;
 
 -- name: GetTicket :one

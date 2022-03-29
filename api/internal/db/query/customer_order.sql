@@ -6,10 +6,9 @@ INSERT INTO customer_order (
   total_price,
   discount,
   final_price,
-  customer_id,
-  customer_payment_id
+  customer_id
 ) VALUES (
-  $1, $2, $3, $4, $5, $6, $7, $8
+  $1, $2, $3, $4, $5, $6, $7
 ) RETURNING *;
 
 -- name: GetCustomerOrder :one

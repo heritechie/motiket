@@ -16,11 +16,11 @@ INSERT INTO customer_payment (
   status,
   success_at,
   failed_reason,
-  customer_id,
-  payment_option_id
+  payment_option_id,
+  customer_order_id
 ) VALUES (
   $1, $2, $3, $4, $5, $6
-) RETURNING id, status, success_at, failed_reason, created_at, updated_at, customer_id, payment_option_id
+) RETURNING id, status, success_at, failed_reason, created_at, updated_at, customer_order_id, payment_option_id
 `
 
 type CreateCustomerPaymentParams struct {
@@ -28,8 +28,8 @@ type CreateCustomerPaymentParams struct {
 	Status          string         `json:"status"`
 	SuccessAt       sql.NullTime   `json:"success_at"`
 	FailedReason    sql.NullString `json:"failed_reason"`
-	CustomerID      uuid.UUID      `json:"customer_id"`
-	PaymentOptionID sql.NullInt32  `json:"payment_option_id"`
+	PaymentOptionID int32          `json:"payment_option_id"`
+	CustomerOrderID uuid.UUID      `json:"customer_order_id"`
 }
 
 func (q *Queries) CreateCustomerPayment(ctx context.Context, arg CreateCustomerPaymentParams) (CustomerPayment, error) {
@@ -38,8 +38,8 @@ func (q *Queries) CreateCustomerPayment(ctx context.Context, arg CreateCustomerP
 		arg.Status,
 		arg.SuccessAt,
 		arg.FailedReason,
-		arg.CustomerID,
 		arg.PaymentOptionID,
+		arg.CustomerOrderID,
 	)
 	var i CustomerPayment
 	err := row.Scan(
@@ -49,14 +49,14 @@ func (q *Queries) CreateCustomerPayment(ctx context.Context, arg CreateCustomerP
 		&i.FailedReason,
 		&i.CreatedAt,
 		&i.UpdatedAt,
-		&i.CustomerID,
+		&i.CustomerOrderID,
 		&i.PaymentOptionID,
 	)
 	return i, err
 }
 
 const getCustomerPayment = `-- name: GetCustomerPayment :one
-SELECT id, status, success_at, failed_reason, created_at, updated_at, customer_id, payment_option_id FROM customer_payment
+SELECT id, status, success_at, failed_reason, created_at, updated_at, customer_order_id, payment_option_id FROM customer_payment
 WHERE id = $1 LIMIT 1
 `
 
@@ -70,14 +70,14 @@ func (q *Queries) GetCustomerPayment(ctx context.Context, id uuid.UUID) (Custome
 		&i.FailedReason,
 		&i.CreatedAt,
 		&i.UpdatedAt,
-		&i.CustomerID,
+		&i.CustomerOrderID,
 		&i.PaymentOptionID,
 	)
 	return i, err
 }
 
 const listCustomerPayment = `-- name: ListCustomerPayment :many
-SELECT id, status, success_at, failed_reason, created_at, updated_at, customer_id, payment_option_id FROM customer_payment
+SELECT id, status, success_at, failed_reason, created_at, updated_at, customer_order_id, payment_option_id FROM customer_payment
 ORDER BY id
 LIMIT $1
 OFFSET $2
@@ -104,7 +104,7 @@ func (q *Queries) ListCustomerPayment(ctx context.Context, arg ListCustomerPayme
 			&i.FailedReason,
 			&i.CreatedAt,
 			&i.UpdatedAt,
-			&i.CustomerID,
+			&i.CustomerOrderID,
 			&i.PaymentOptionID,
 		); err != nil {
 			return nil, err
@@ -118,4 +118,32 @@ func (q *Queries) ListCustomerPayment(ctx context.Context, arg ListCustomerPayme
 		return nil, err
 	}
 	return items, nil
+}
+
+const updateCustomerPayment = `-- name: UpdateCustomerPayment :one
+UPDATE customer_payment
+SET status=$1, success_at=$2, failed_reason=$3, updated_at=NOW()
+RETURNING id, status, success_at, failed_reason, created_at, updated_at, customer_order_id, payment_option_id
+`
+
+type UpdateCustomerPaymentParams struct {
+	Status       string         `json:"status"`
+	SuccessAt    sql.NullTime   `json:"success_at"`
+	FailedReason sql.NullString `json:"failed_reason"`
+}
+
+func (q *Queries) UpdateCustomerPayment(ctx context.Context, arg UpdateCustomerPaymentParams) (CustomerPayment, error) {
+	row := q.db.QueryRowContext(ctx, updateCustomerPayment, arg.Status, arg.SuccessAt, arg.FailedReason)
+	var i CustomerPayment
+	err := row.Scan(
+		&i.ID,
+		&i.Status,
+		&i.SuccessAt,
+		&i.FailedReason,
+		&i.CreatedAt,
+		&i.UpdatedAt,
+		&i.CustomerOrderID,
+		&i.PaymentOptionID,
+	)
+	return i, err
 }

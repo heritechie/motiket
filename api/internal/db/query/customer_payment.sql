@@ -4,8 +4,8 @@ INSERT INTO customer_payment (
   status,
   success_at,
   failed_reason,
-  customer_id,
-  payment_option_id
+  payment_option_id,
+  customer_order_id
 ) VALUES (
   $1, $2, $3, $4, $5, $6
 ) RETURNING *;
@@ -19,3 +19,8 @@ SELECT * FROM customer_payment
 ORDER BY id
 LIMIT $1
 OFFSET $2;
+
+-- name: UpdateCustomerPayment :one
+UPDATE customer_payment
+SET status=$1, success_at=$2, failed_reason=$3, updated_at=NOW()
+RETURNING *;

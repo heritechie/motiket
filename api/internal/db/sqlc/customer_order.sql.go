@@ -19,22 +19,20 @@ INSERT INTO customer_order (
   total_price,
   discount,
   final_price,
-  customer_id,
-  customer_payment_id
+  customer_id
 ) VALUES (
-  $1, $2, $3, $4, $5, $6, $7, $8
-) RETURNING id, order_time, time_paid, total_price, discount, final_price, customer_id, customer_payment_id, created_at, updated_at
+  $1, $2, $3, $4, $5, $6, $7
+) RETURNING id, order_time, time_paid, total_price, discount, final_price, customer_id, created_at, updated_at
 `
 
 type CreateCustomerOrderParams struct {
-	ID                uuid.UUID     `json:"id"`
-	OrderTime         time.Time     `json:"order_time"`
-	TimePaid          sql.NullTime  `json:"time_paid"`
-	TotalPrice        int64         `json:"total_price"`
-	Discount          sql.NullInt32 `json:"discount"`
-	FinalPrice        int64         `json:"final_price"`
-	CustomerID        uuid.UUID     `json:"customer_id"`
-	CustomerPaymentID uuid.UUID     `json:"customer_payment_id"`
+	ID         uuid.UUID     `json:"id"`
+	OrderTime  time.Time     `json:"order_time"`
+	TimePaid   sql.NullTime  `json:"time_paid"`
+	TotalPrice int64         `json:"total_price"`
+	Discount   sql.NullInt32 `json:"discount"`
+	FinalPrice int64         `json:"final_price"`
+	CustomerID uuid.UUID     `json:"customer_id"`
 }
 
 func (q *Queries) CreateCustomerOrder(ctx context.Context, arg CreateCustomerOrderParams) (CustomerOrder, error) {
@@ -46,7 +44,6 @@ func (q *Queries) CreateCustomerOrder(ctx context.Context, arg CreateCustomerOrd
 		arg.Discount,
 		arg.FinalPrice,
 		arg.CustomerID,
-		arg.CustomerPaymentID,
 	)
 	var i CustomerOrder
 	err := row.Scan(
@@ -57,7 +54,6 @@ func (q *Queries) CreateCustomerOrder(ctx context.Context, arg CreateCustomerOrd
 		&i.Discount,
 		&i.FinalPrice,
 		&i.CustomerID,
-		&i.CustomerPaymentID,
 		&i.CreatedAt,
 		&i.UpdatedAt,
 	)
@@ -65,7 +61,7 @@ func (q *Queries) CreateCustomerOrder(ctx context.Context, arg CreateCustomerOrd
 }
 
 const getCustomerOrder = `-- name: GetCustomerOrder :one
-SELECT id, order_time, time_paid, total_price, discount, final_price, customer_id, customer_payment_id, created_at, updated_at FROM customer_order
+SELECT id, order_time, time_paid, total_price, discount, final_price, customer_id, created_at, updated_at FROM customer_order
 WHERE id = $1 LIMIT 1
 `
 
@@ -80,7 +76,6 @@ func (q *Queries) GetCustomerOrder(ctx context.Context, id uuid.UUID) (CustomerO
 		&i.Discount,
 		&i.FinalPrice,
 		&i.CustomerID,
-		&i.CustomerPaymentID,
 		&i.CreatedAt,
 		&i.UpdatedAt,
 	)
@@ -88,7 +83,7 @@ func (q *Queries) GetCustomerOrder(ctx context.Context, id uuid.UUID) (CustomerO
 }
 
 const listCustomerOrder = `-- name: ListCustomerOrder :many
-SELECT id, order_time, time_paid, total_price, discount, final_price, customer_id, customer_payment_id, created_at, updated_at FROM customer_order
+SELECT id, order_time, time_paid, total_price, discount, final_price, customer_id, created_at, updated_at FROM customer_order
 ORDER BY id
 LIMIT $1
 OFFSET $2
@@ -116,7 +111,6 @@ func (q *Queries) ListCustomerOrder(ctx context.Context, arg ListCustomerOrderPa
 			&i.Discount,
 			&i.FinalPrice,
 			&i.CustomerID,
-			&i.CustomerPaymentID,
 			&i.CreatedAt,
 			&i.UpdatedAt,
 		); err != nil {

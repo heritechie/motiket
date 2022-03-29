@@ -5,6 +5,8 @@ package db
 
 import (
 	"context"
+	"database/sql"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -20,9 +22,9 @@ INSERT INTO order_ticket (
 `
 
 type CreateOrderTicketParams struct {
-	Qty             int32     `json:"qty"`
-	TicketID        uuid.UUID `json:"ticket_id"`
-	CustomerOrderID uuid.UUID `json:"customer_order_id"`
+	Qty             sql.NullInt32 `json:"qty"`
+	TicketID        uuid.UUID     `json:"ticket_id"`
+	CustomerOrderID uuid.UUID     `json:"customer_order_id"`
 }
 
 func (q *Queries) CreateOrderTicket(ctx context.Context, arg CreateOrderTicketParams) (OrderTicket, error) {
@@ -32,28 +34,49 @@ func (q *Queries) CreateOrderTicket(ctx context.Context, arg CreateOrderTicketPa
 	return i, err
 }
 
-const listOrderTicket = `-- name: ListOrderTicket :many
-SELECT qty, ticket_id, customer_order_id FROM order_ticket
+const listOrderTicketByCustomerOrderId = `-- name: ListOrderTicketByCustomerOrderId :many
+SELECT 
+  t.id, 
+  t.serial_number, 
+  COALESCE(t.purchase_date, now()) purchase_date,
+  tc.name category_name
+FROM order_ticket ot
+INNER JOIN ticket t ON t.id = ot.ticket_id
+INNER JOIN ticket_category tc ON tc.id = t.ticket_category_id
+WHERE ot.customer_order_id = $1
 ORDER BY id
-LIMIT $1
-OFFSET $2
+LIMIT $2
+OFFSET $3
 `
 
-type ListOrderTicketParams struct {
-	Limit  int32 `json:"limit"`
-	Offset int32 `json:"offset"`
+type ListOrderTicketByCustomerOrderIdParams struct {
+	CustomerOrderID uuid.UUID `json:"customer_order_id"`
+	Limit           int32     `json:"limit"`
+	Offset          int32     `json:"offset"`
 }
 
-func (q *Queries) ListOrderTicket(ctx context.Context, arg ListOrderTicketParams) ([]OrderTicket, error) {
-	rows, err := q.db.QueryContext(ctx, listOrderTicket, arg.Limit, arg.Offset)
+type ListOrderTicketByCustomerOrderIdRow struct {
+	ID           uuid.UUID `json:"id"`
+	SerialNumber string    `json:"serial_number"`
+	PurchaseDate time.Time `json:"purchase_date"`
+	CategoryName string    `json:"category_name"`
+}
+
+func (q *Queries) ListOrderTicketByCustomerOrderId(ctx context.Context, arg ListOrderTicketByCustomerOrderIdParams) ([]ListOrderTicketByCustomerOrderIdRow, error) {
+	rows, err := q.db.QueryContext(ctx, listOrderTicketByCustomerOrderId, arg.CustomerOrderID, arg.Limit, arg.Offset)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	items := []OrderTicket{}
+	items := []ListOrderTicketByCustomerOrderIdRow{}
 	for rows.Next() {
-		var i OrderTicket
-		if err := rows.Scan(&i.Qty, &i.TicketID, &i.CustomerOrderID); err != nil {
+		var i ListOrderTicketByCustomerOrderIdRow
+		if err := rows.Scan(
+			&i.ID,
+			&i.SerialNumber,
+			&i.PurchaseDate,
+			&i.CategoryName,
+		); err != nil {
 			return nil, err
 		}
 		items = append(items, i)

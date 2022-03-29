@@ -32,16 +32,15 @@ func NewServer(store db.Store) *Server {
 	router.GET(apiV1+"customers/:id", server.getCustomer)
 	router.GET(apiV1+"customers", server.listCustomer)
 
-	router.POST(apiV1+"order-tickets", server.createOrderTicket)
-	router.GET(apiV1+"order-tickets", server.listOrderTicket)
-
 	router.POST(apiV1+"payment-options", server.createPaymentOption)
 	router.GET(apiV1+"payment-options/:id", server.getPaymentOption)
 	router.GET(apiV1+"payment-options", server.listPaymentOption)
 
-	router.POST(apiV1+"customer-orders", server.createCustomerOrder)
-	router.GET(apiV1+"customer-orders/:id", server.getCustomerOrder)
-	router.GET(apiV1+"customer-orders", server.listCustomerOrder)
+	router.POST(apiV1+"checkout-order", server.checkoutOrder)
+	router.GET(apiV1+"orders/:id", server.getOrderByCustomerOrderId)
+
+	router.POST(apiV1+"payment-order", server.paymentOrder)
+	router.POST(apiV1+"payment-order/confirmation", server.paymentOrderConfirmation)
 
 	server.router = router
 	return server

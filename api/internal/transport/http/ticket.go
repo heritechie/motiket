@@ -11,9 +11,8 @@ import (
 )
 
 type createTicketRequest struct {
-	SerialNumber     string `json:"serial_number"`
-	TicketCategoryID string `json:"ticket_category_id" binding:"required`
-	EventID          string `json:"event_id" binding:"required`
+	SerialNumber     string `json:"serial_number"` // TODO: Must be autogenerate based on prefix
+	TicketCategoryID string `json:"ticket_category_id" binding:"required"`
 }
 
 func (server *Server) createTicket(ctx *gin.Context) {
@@ -24,12 +23,11 @@ func (server *Server) createTicket(ctx *gin.Context) {
 	}
 
 	tcUUID, _ := uuid.Parse(req.TicketCategoryID)
-	eventIDUUID, _ := uuid.Parse(req.EventID)
 
 	arg := db.CreateTicketParams{
+		ID:               uuid.New(),
 		SerialNumber:     req.SerialNumber,
 		TicketCategoryID: tcUUID,
-		EventID:          eventIDUUID,
 	}
 
 	event, err := server.store.CreateTicket(ctx, arg)

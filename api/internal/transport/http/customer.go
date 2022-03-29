@@ -24,6 +24,7 @@ func (server *Server) createCustomer(ctx *gin.Context) {
 	}
 
 	arg := db.CreateCustomerParams{
+		ID: uuid.New(),
 		FullName: sql.NullString{
 			String: req.FullName,
 			Valid:  true,

@@ -17,19 +17,20 @@ type Customer struct {
 	PhoneNumber      sql.NullString `json:"phone_number"`
 	ConfirmationCode sql.NullString `json:"confirmation_code"`
 	ConfirmationTime sql.NullTime   `json:"confirmation_time"`
-	CreatedAt        time.Time      `json:"created_at"`
-	UpdatedAt        time.Time      `json:"updated_at"`
+	// When customer created
+	CreatedAt time.Time `json:"created_at"`
+	// When customer created
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 type CustomerOrder struct {
-	ID                uuid.UUID     `json:"id"`
-	OrderTime         time.Time     `json:"order_time"`
-	TimePaid          sql.NullTime  `json:"time_paid"`
-	TotalPrice        int64         `json:"total_price"`
-	Discount          sql.NullInt32 `json:"discount"`
-	FinalPrice        int64         `json:"final_price"`
-	CustomerID        uuid.UUID     `json:"customer_id"`
-	CustomerPaymentID uuid.UUID     `json:"customer_payment_id"`
+	ID         uuid.UUID     `json:"id"`
+	OrderTime  time.Time     `json:"order_time"`
+	TimePaid   sql.NullTime  `json:"time_paid"`
+	TotalPrice int64         `json:"total_price"`
+	Discount   sql.NullInt32 `json:"discount"`
+	FinalPrice int64         `json:"final_price"`
+	CustomerID uuid.UUID     `json:"customer_id"`
 	// When order created
 	CreatedAt time.Time `json:"created_at"`
 	// When order created
@@ -44,9 +45,9 @@ type CustomerPayment struct {
 	// When payment created
 	CreatedAt time.Time `json:"created_at"`
 	// When payment created
-	UpdatedAt       time.Time     `json:"updated_at"`
-	CustomerID      uuid.UUID     `json:"customer_id"`
-	PaymentOptionID sql.NullInt32 `json:"payment_option_id"`
+	UpdatedAt       time.Time `json:"updated_at"`
+	CustomerOrderID uuid.UUID `json:"customer_order_id"`
+	PaymentOptionID int32     `json:"payment_option_id"`
 }
 
 type Event struct {
@@ -56,14 +57,16 @@ type Event struct {
 	StartDate   sql.NullTime   `json:"start_date"`
 	EndDate     sql.NullTime   `json:"end_date"`
 	Prefix      string         `json:"prefix"`
-	CreatedAt   time.Time      `json:"created_at"`
-	UpdatedAt   time.Time      `json:"updated_at"`
+	// When event created
+	CreatedAt time.Time `json:"created_at"`
+	// When event created
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 type OrderTicket struct {
-	Qty             int32     `json:"qty"`
-	TicketID        uuid.UUID `json:"ticket_id"`
-	CustomerOrderID uuid.UUID `json:"customer_order_id"`
+	Qty             sql.NullInt32 `json:"qty"`
+	TicketID        uuid.UUID     `json:"ticket_id"`
+	CustomerOrderID uuid.UUID     `json:"customer_order_id"`
 }
 
 type PaymentOption struct {
@@ -72,25 +75,27 @@ type PaymentOption struct {
 }
 
 type Ticket struct {
-	ID               uuid.UUID      `json:"id"`
-	SerialNumber     string         `json:"serial_number"`
-	Seat             sql.NullString `json:"seat"`
-	PurchaseDate     sql.NullTime   `json:"purchase_date"`
-	CreatedAt        time.Time      `json:"created_at"`
-	UpdatedAt        time.Time      `json:"updated_at"`
-	TicketCategoryID uuid.UUID      `json:"ticket_category_id"`
-	EventID          uuid.UUID      `json:"event_id"`
+	ID           uuid.UUID    `json:"id"`
+	SerialNumber string       `json:"serial_number"`
+	PurchaseDate sql.NullTime `json:"purchase_date"`
+	// When ticket created
+	CreatedAt time.Time `json:"created_at"`
+	// When ticket created
+	UpdatedAt        time.Time `json:"updated_at"`
+	TicketCategoryID uuid.UUID `json:"ticket_category_id"`
 }
 
 type TicketCategory struct {
-	ID        uuid.UUID      `json:"id"`
-	Name      string         `json:"name"`
-	Prefix    string         `json:"prefix"`
-	Qty       int64          `json:"qty"`
-	Price     int64          `json:"price"`
-	StartDate sql.NullTime   `json:"start_date"`
-	EndDate   sql.NullTime   `json:"end_date"`
-	CreatedAt time.Time      `json:"created_at"`
+	ID        uuid.UUID    `json:"id"`
+	Name      string       `json:"name"`
+	Prefix    string       `json:"prefix"`
+	Qty       int64        `json:"qty"`
+	Price     int64        `json:"price"`
+	StartDate sql.NullTime `json:"start_date"`
+	EndDate   sql.NullTime `json:"end_date"`
+	// When ticket category created
+	CreatedAt time.Time `json:"created_at"`
+	// When ticket category created
 	UpdatedAt time.Time      `json:"updated_at"`
 	Area      sql.NullString `json:"area"`
 	EventID   uuid.UUID      `json:"event_id"`

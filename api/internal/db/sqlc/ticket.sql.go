@@ -14,49 +14,41 @@ const createTicket = `-- name: CreateTicket :one
 INSERT INTO ticket (
   id,
   serial_number,
-  seat,
   purchase_date,
-  ticket_category_id,
-  event_id
+  ticket_category_id
 ) VALUES (
-  $1, $2, $3, $4, $5, $6
-) RETURNING id, serial_number, seat, purchase_date, created_at, updated_at, ticket_category_id, event_id
+  $1, $2, $3, $4
+) RETURNING id, serial_number, purchase_date, created_at, updated_at, ticket_category_id
 `
 
 type CreateTicketParams struct {
-	ID               uuid.UUID      `json:"id"`
-	SerialNumber     string         `json:"serial_number"`
-	Seat             sql.NullString `json:"seat"`
-	PurchaseDate     sql.NullTime   `json:"purchase_date"`
-	TicketCategoryID uuid.UUID      `json:"ticket_category_id"`
-	EventID          uuid.UUID      `json:"event_id"`
+	ID               uuid.UUID    `json:"id"`
+	SerialNumber     string       `json:"serial_number"`
+	PurchaseDate     sql.NullTime `json:"purchase_date"`
+	TicketCategoryID uuid.UUID    `json:"ticket_category_id"`
 }
 
 func (q *Queries) CreateTicket(ctx context.Context, arg CreateTicketParams) (Ticket, error) {
 	row := q.db.QueryRowContext(ctx, createTicket,
 		arg.ID,
 		arg.SerialNumber,
-		arg.Seat,
 		arg.PurchaseDate,
 		arg.TicketCategoryID,
-		arg.EventID,
 	)
 	var i Ticket
 	err := row.Scan(
 		&i.ID,
 		&i.SerialNumber,
-		&i.Seat,
 		&i.PurchaseDate,
 		&i.CreatedAt,
 		&i.UpdatedAt,
 		&i.TicketCategoryID,
-		&i.EventID,
 	)
 	return i, err
 }
 
 const getTicket = `-- name: GetTicket :one
-SELECT id, serial_number, seat, purchase_date, created_at, updated_at, ticket_category_id, event_id FROM ticket
+SELECT id, serial_number, purchase_date, created_at, updated_at, ticket_category_id FROM ticket
 WHERE id = $1 LIMIT 1
 `
 
@@ -66,18 +58,16 @@ func (q *Queries) GetTicket(ctx context.Context, id uuid.UUID) (Ticket, error) {
 	err := row.Scan(
 		&i.ID,
 		&i.SerialNumber,
-		&i.Seat,
 		&i.PurchaseDate,
 		&i.CreatedAt,
 		&i.UpdatedAt,
 		&i.TicketCategoryID,
-		&i.EventID,
 	)
 	return i, err
 }
 
 const listTicket = `-- name: ListTicket :many
-SELECT id, serial_number, seat, purchase_date, created_at, updated_at, ticket_category_id, event_id FROM ticket
+SELECT id, serial_number, purchase_date, created_at, updated_at, ticket_category_id FROM ticket
 ORDER BY id
 LIMIT $1
 OFFSET $2
@@ -100,12 +90,10 @@ func (q *Queries) ListTicket(ctx context.Context, arg ListTicketParams) ([]Ticke
 		if err := rows.Scan(
 			&i.ID,
 			&i.SerialNumber,
-			&i.Seat,
 			&i.PurchaseDate,
 			&i.CreatedAt,
 			&i.UpdatedAt,
 			&i.TicketCategoryID,
-			&i.EventID,
 		); err != nil {
 			return nil, err
 		}
