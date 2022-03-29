@@ -1,0 +1,606 @@
+{
+	"info": {
+		"_postman_id": "63a88111-e493-4039-b90a-efd541b83ba6",
+		"name": "motiket",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Event",
+			"item": [
+				{
+					"name": "Create Event",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hammersonic\",\r\n    \"description\": \"Hammersonic 2022\",\r\n    \"prefix\": \"HSC2022\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://motiket-api.ob9pup1m62uv0.ap-southeast-1.cs.amazonlightsail.com/api/v1/events",
+							"protocol": "https",
+							"host": [
+								"motiket-api",
+								"ob9pup1m62uv0",
+								"ap-southeast-1",
+								"cs",
+								"amazonlightsail",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Event",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://motiket-api.ob9pup1m62uv0.ap-southeast-1.cs.amazonlightsail.com/api/v1/events/291acfd0-7e51-4657-a50a-fdd328b53dd2",
+							"protocol": "https",
+							"host": [
+								"motiket-api",
+								"ob9pup1m62uv0",
+								"ap-southeast-1",
+								"cs",
+								"amazonlightsail",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"events",
+								"291acfd0-7e51-4657-a50a-fdd328b53dd2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Event",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://motiket-api.ob9pup1m62uv0.ap-southeast-1.cs.amazonlightsail.com/api/v1/events?page_id=1&page_size=6",
+							"protocol": "https",
+							"host": [
+								"motiket-api",
+								"ob9pup1m62uv0",
+								"ap-southeast-1",
+								"cs",
+								"amazonlightsail",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"events"
+							],
+							"query": [
+								{
+									"key": "page_id",
+									"value": "1"
+								},
+								{
+									"key": "page_size",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ticket Category",
+			"item": [
+				{
+					"name": "Create Ticket Category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"VIP\",\r\n    \"qty\": 1000,\r\n    \"price\": 300000,\r\n    \"prefix\": \"VIP\",\r\n    \"event_id\": \"291acfd0-7e51-4657-a50a-fdd328b53dd2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://motiket-api.ob9pup1m62uv0.ap-southeast-1.cs.amazonlightsail.com/api/v1/ticket-categories",
+							"protocol": "https",
+							"host": [
+								"motiket-api",
+								"ob9pup1m62uv0",
+								"ap-southeast-1",
+								"cs",
+								"amazonlightsail",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"ticket-categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Ticket Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://motiket-api.ob9pup1m62uv0.ap-southeast-1.cs.amazonlightsail.com/api/v1/ticket-categories?page_id=1&page_size=6",
+							"protocol": "https",
+							"host": [
+								"motiket-api",
+								"ob9pup1m62uv0",
+								"ap-southeast-1",
+								"cs",
+								"amazonlightsail",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"ticket-categories"
+							],
+							"query": [
+								{
+									"key": "page_id",
+									"value": "1"
+								},
+								{
+									"key": "page_size",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Ticket Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://motiket-api.ob9pup1m62uv0.ap-southeast-1.cs.amazonlightsail.com/api/v1/ticket-categories/c794e947-0ef9-44ac-960f-5cd05f5e840e",
+							"protocol": "https",
+							"host": [
+								"motiket-api",
+								"ob9pup1m62uv0",
+								"ap-southeast-1",
+								"cs",
+								"amazonlightsail",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"ticket-categories",
+								"c794e947-0ef9-44ac-960f-5cd05f5e840e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payment Option",
+			"item": [
+				{
+					"name": "Create Payment Option",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"VA BCA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://motiket-api.ob9pup1m62uv0.ap-southeast-1.cs.amazonlightsail.com/api/v1/payment-options",
+							"protocol": "https",
+							"host": [
+								"motiket-api",
+								"ob9pup1m62uv0",
+								"ap-southeast-1",
+								"cs",
+								"amazonlightsail",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"payment-options"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Payment Option",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://motiket-api.ob9pup1m62uv0.ap-southeast-1.cs.amazonlightsail.com/api/v1/payment-options?page_id=1&page_size=10",
+							"protocol": "https",
+							"host": [
+								"motiket-api",
+								"ob9pup1m62uv0",
+								"ap-southeast-1",
+								"cs",
+								"amazonlightsail",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"payment-options"
+							],
+							"query": [
+								{
+									"key": "page_id",
+									"value": "1"
+								},
+								{
+									"key": "page_size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Create Customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"full_name\": \"Heriyanto\",\r\n    \"phone_number\": \"085224416325\",\r\n    \"email\": \"heritechie@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://motiket-api.ob9pup1m62uv0.ap-southeast-1.cs.amazonlightsail.com/api/v1/customers",
+							"protocol": "https",
+							"host": [
+								"motiket-api",
+								"ob9pup1m62uv0",
+								"ap-southeast-1",
+								"cs",
+								"amazonlightsail",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Customer",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://motiket-api.ob9pup1m62uv0.ap-southeast-1.cs.amazonlightsail.com/api/v1/customers?page_id=1&page_size=10",
+							"protocol": "https",
+							"host": [
+								"motiket-api",
+								"ob9pup1m62uv0",
+								"ap-southeast-1",
+								"cs",
+								"amazonlightsail",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"customers"
+							],
+							"query": [
+								{
+									"key": "page_id",
+									"value": "1"
+								},
+								{
+									"key": "page_size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ticket",
+			"item": [
+				{
+					"name": "List Ticket",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://motiket-api.ob9pup1m62uv0.ap-southeast-1.cs.amazonlightsail.com/api/v1/tickets?page_id=1&page_size=6",
+							"protocol": "https",
+							"host": [
+								"motiket-api",
+								"ob9pup1m62uv0",
+								"ap-southeast-1",
+								"cs",
+								"amazonlightsail",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tickets"
+							],
+							"query": [
+								{
+									"key": "page_id",
+									"value": "1"
+								},
+								{
+									"key": "page_size",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Ticket",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"serial_number\": \"SOL2022VIP00009\",\r\n    \"ticket_category_id\": \"11ee588e-f0d8-4255-976d-5ca2b8fe976c\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://motiket-api.ob9pup1m62uv0.ap-southeast-1.cs.amazonlightsail.com/api/v1/tickets",
+							"protocol": "https",
+							"host": [
+								"motiket-api",
+								"ob9pup1m62uv0",
+								"ap-southeast-1",
+								"cs",
+								"amazonlightsail",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tickets"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Checkout Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer_id\": \"5526169e-362a-4110-9e26-50f7667208db\",\r\n    \"total_price\": 500000,\r\n    \"discount\": 0,\r\n    \"final_price\": 500000,\r\n    \"list_order_ticket\": [\r\n        {\r\n            \"qty\": 1,\r\n            \"ticket_id\": \"435c8832-785b-4c50-ad26-678f53567514\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://motiket-api.ob9pup1m62uv0.ap-southeast-1.cs.amazonlightsail.com/api/v1/checkout-order",
+							"protocol": "https",
+							"host": [
+								"motiket-api",
+								"ob9pup1m62uv0",
+								"ap-southeast-1",
+								"cs",
+								"amazonlightsail",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"checkout-order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://motiket-api.ob9pup1m62uv0.ap-southeast-1.cs.amazonlightsail.com/api/v1/orders/5e56250e-4560-4739-904f-1d150f53007c",
+							"protocol": "https",
+							"host": [
+								"motiket-api",
+								"ob9pup1m62uv0",
+								"ap-southeast-1",
+								"cs",
+								"amazonlightsail",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"5e56250e-4560-4739-904f-1d150f53007c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payment",
+			"item": [
+				{
+					"name": "Create Payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"payment_option_id\": 1,\r\n    \"customer_order_id\": \"5e56250e-4560-4739-904f-1d150f53007c\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://motiket-api.ob9pup1m62uv0.ap-southeast-1.cs.amazonlightsail.com/api/v1/payment-order",
+							"protocol": "https",
+							"host": [
+								"motiket-api",
+								"ob9pup1m62uv0",
+								"ap-southeast-1",
+								"cs",
+								"amazonlightsail",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"payment-order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Payment Notification",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"payment_id\": \"5bb8234c-d81c-40ef-b9d2-b8ab0f83e8d1\",\r\n    \"status\": \"SUCCESS\",\r\n    \"failed_reason\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://motiket-api.ob9pup1m62uv0.ap-southeast-1.cs.amazonlightsail.com/api/v1/payment-order/confirmation",
+							"protocol": "https",
+							"host": [
+								"motiket-api",
+								"ob9pup1m62uv0",
+								"ap-southeast-1",
+								"cs",
+								"amazonlightsail",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"payment-order",
+								"confirmation"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
